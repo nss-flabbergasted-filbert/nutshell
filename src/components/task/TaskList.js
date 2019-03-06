@@ -19,8 +19,8 @@ export default class TaskList extends Component {
                 {
                     this.props.tasks.map(task =>
                         <div className="task" key={task.id}>
-                            <h4>Task Name:{task.name}</h4>
-                            <h2>Task Completion Date:{task.completion_date}</h2>
+                            <h5>Task Name:{task.name}</h5>
+                            <h5>Task Completion Date:{task.completion_date}</h5>
                         </div>
                     )
                 }

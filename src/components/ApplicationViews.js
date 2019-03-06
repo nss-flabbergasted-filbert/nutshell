@@ -25,6 +25,9 @@ class ApplicationViews extends Component {
           this.setState({ tasks: tasks })
       )
 
+  deleteTask = task => 
+  TaskManager.deleteAndList(task) 
+
   componentDidMount() {
 
     TaskManager.getAll()
