@@ -1,24 +1,43 @@
-import React, {Component} from "react"
+import React, { Component } from "react";
 
 export default class NewsList extends Component {
-    render () {
-        return (
-            <React.Fragment>
-                <div className="newsList">
-                    <section>
-                        {
-                            this.props.news.map(article =>
-                                <div key ={article.id}>
-                                <div>{article.title}</div>
-                                <div>{article.summary}</div>
-                                <div>{article.url}</div>
-                                <div>{article.timestamp}</div>
-                                <div>{article.userId}</div>
-                                </div>)
-                        }
-                    </section>
-                </div>
-            </React.Fragment>
-        )
-    }
+  render() {
+    return (
+      <React.Fragment>
+        <section className="newsList">
+          <div className="addNewsButton">
+            <button
+              type="button"
+              className="add-news-button"
+              onClick={() => {
+                this.props.history.push("/articles/new");
+              }}
+            >
+              Add New Story!
+            </button>
+          </div>
+          <section>
+            {this.props.news.map(article => (
+              <div key={article.id}>
+                <div>Title: {article.title}</div>
+                <div>Synopsis: {article.summary}</div>
+                <div>Link: {article.url}</div>
+                <button
+                  type="button"
+                  className="btn btn-success"
+                  onClick={() => {
+                    this.props.history.push(
+                      `/articles/${this.props.article.id}/edit`
+                    );
+                  }}
+                >
+                  Edit
+                </button>
+              </div>
+            ))}
+          </section>
+        </section>
+      </React.Fragment>
+    );
+  }
 }
