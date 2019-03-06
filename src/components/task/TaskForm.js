@@ -5,7 +5,7 @@ export default class TaskForm extends Component {
     // Set initial state, AnimalForm has it's own state//maintains state of input field as I update the input
     state = {
       name: "",
-      completion_date: ""
+      date: ""
     };
   
     // Update state whenever an input field is edited
@@ -26,7 +26,7 @@ export default class TaskForm extends Component {
       } else {
         const tasks = {
           name: this.state.name,
-          completion_date: this.state.completion_date
+          date: this.state.date
         }
   
         // Create the animal and redirect user to animal list
@@ -58,7 +58,7 @@ export default class TaskForm extends Component {
              required
              className="form-control"
              onChange={this.handleFieldChange}
-             id="completion_date"
+             id="date"
              placeholder="Date"
            />
          </div>

@@ -1,100 +1,78 @@
-import React, { Component } from "react"
+// import React, { Component } from "react"
 
 
-export default class AnimalEditForm extends Component {
-    // Set initial state
-    state = {
-      name: ""
-    }
+// export default class EditTaskForm extends Component {
+//     // Set initial state
+//     state = {
+//         name: "",
+//         date: ""
+//     }
 
 
-    handleFieldChange = evt => {
-        const stateToChange = {}
-        stateToChange[evt.target.id] = evt.target.value
-        this.setState(stateToChange)
-    }
+//     handleFieldChange = evt => {
+//         const stateToChange = {}
+//         stateToChange[evt.target.id] = evt.target.value
+//         this.setState(stateToChange)
+//     }
 
-    updateExistingAnimal = evt => {
-      evt.preventDefault()
+//     editTask = evt => {
+//         evt.preventDefault()
 
-      if (this.state.employee === "") {
-        window.alert("Please select a caretaker");
-      } else {
-        const editedAnimal = {
-          id: this.props.match.params.animalId,
-          name: this.state.name,
-          breed: this.state.breed,
-          employeeId: parseInt(this.state.employeeId)
-        };
+//         if (this.state.task === "") {
+//             window.alert("Please select a task");
+//         } else {
+//             const editedTask = {
+//                 id: this.props.match.params.taskId,
+//                 name: this.state.name,
+//                 date: this.state.date,
+//             };
 
-    this.props.updateAnimal(editedAnimal)
-    .then(() => this.props.history.push("/animals"))      
-    }
-  }
+//             this.props.updateAnimal(editedTask)
+//                 .then(() => this.props.history.push("/tasks"))
+//         }
+//     }
 
-    componentDidMount() {
-      AnimalManager.getAllAnimals(this.props.match.params.animalId)
-      .then(animal => {
-        this.setState({
-          name: animal.name,
-          breed: animal.breed,
-          employeeId: animal.employeeId
-        });
-      });
-    }
+//     componentDidMount() {
 
 
-    render() {
-      return (
-        <React.Fragment>
-          <form className="animalForm">
-            <div className="form-group">
-              <label htmlFor="name">Animal name</label>
-              <input
-                type="text"
-                required
-                className="form-control"
-                onChange={this.handleFieldChange}
-                id="name"
-                value = {this.state.name}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="breed">Breed</label>
-              <input
-                type="text"
-                required
-                className="form-control"
-                onChange={this.handleFieldChange}
-                id="breed"
-                value = {this.state.breed}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="employee">Assign to caretaker</label>
-              <select
-                name="employee"
-                id="employeeId"
-                onChange={this.handleFieldChange}
-                value = {this.state.employeeId}
-              >
-                <option value="">Select an employee</option>
-                {this.props.employees.map(e => (
-                  <option key={e.id} id={e.id} value={e.id}>
-                    {e.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <button
-              type="submit"
-              onClick={this.updateExistingAnimal}
-              className="btn btn-primary"
-            >
-              Submit
-            </button>
-          </form>
-        </React.Fragment>
-      );
-    }
-}
+
+//         render() {
+//             return (
+//                 <React.Fragment>
+//                     <form className="taskForm">
+//                         <div className="form-group">
+//                             <label htmlFor="taskName">Task Name</label>
+//                             <input
+//                                 type="text"
+//                                 required
+//                                 className="form-control"
+//                                 onChange={this.handleFieldChange}
+//                                 id="name"
+//                                 placeholder="Task Name"
+//                             />
+//                         </div>
+//                         <div className="dateForm">
+//                             <label htmlFor="dateForm">Date</label>
+//                             <input
+//                                 type="Date"
+//                                 required
+//                                 className="form-control"
+//                                 onChange={this.handleFieldChange}
+//                                 id="date"
+//                                 placeholder="Date"
+//                             />
+//                         </div>
+
+//                         <button
+//                             type="submit"
+//                             onClick={this.constructNewTask}
+//                             className="btn btn-primary"
+//                         >
+//                             Submit
+//             </button>
+//                     </form>
+//                 </React.Fragment>
+//             );
+//         }
+//     }
+// }

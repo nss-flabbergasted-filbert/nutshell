@@ -9,6 +9,7 @@ import TaskList from './task/TaskList'
 import TaskManager from '../modules/TaskManager'
 
 import TaskForm from './task/TaskForm'
+import EditTaskForm from './task/EditTaskForm'
 class ApplicationViews extends Component {
 
   state = {
@@ -19,14 +20,17 @@ class ApplicationViews extends Component {
   }
 
   addTask = task =>
-  TaskManager.post(task)
+    TaskManager.post(task)
       .then(() => TaskManager.getAll())
       .then(tasks =>
-          this.setState({ tasks: tasks })
+        this.setState({ tasks: tasks })
       )
 
-  deleteTask = task => 
-  TaskManager.deleteAndList(task) 
+  deleteTask = task =>
+    TaskManager.deleteAndList(task)
+
+  editTask = task =>
+    TaskManager.put(task)
 
   componentDidMount() {
 
@@ -55,7 +59,11 @@ class ApplicationViews extends Component {
           addTask={this.addTask} {...props}
           tasks={this.state.tasks} {...props} />
       }} />
-
+      <Route
+        path="/tasks/:taskId(\d+)/edit" render={props => {
+          return <EditTaskForm {...props} tasks={this.state.tasks} editTask={this.editTask} />
+        }}
+      />
 
     </React.Fragment>
   }
