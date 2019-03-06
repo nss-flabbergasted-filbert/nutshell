@@ -29,6 +29,13 @@ class ApplicationViews extends Component {
   state = {
     tasks: this.tasksFromAPI
   }
+  // state = {
+  //   chat: [],
+  //   news: [],
+  //   events: [],
+  //   tasks: []
+  // }
+
   componentDidMount() { }
   render() {
     console.log(this.props.activeUser)
@@ -45,7 +52,7 @@ class ApplicationViews extends Component {
        <Route exact path="/tasks" render={(props) => {
         return <TaskList tasks={this.state.tasks} />
       }} />
-      
+
 
     </React.Fragment>
   }
