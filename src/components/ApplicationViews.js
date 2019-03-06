@@ -16,36 +16,44 @@ class ApplicationViews extends Component {
     tasks: []
   }
 
-
+  addEvent = (object) => {
+    return EventManager.post(object)
+      .then(() => {
+        return EventManager.getAll()
+      })
+      .then(events => this.setState({ events: events }))
+  }
 
   deleteEvent = (id) =>
-  EventManager.deleteAndList(id)
+    EventManager.deleteAndList(id)
       // .then(EventManager.getAll)
       .then(events => this.setState({ events: events }))
 
   componentDidMount() {
     EventManager.getAll()
-    .then(events => this.setState({ events: events}))
+      .then(events => this.setState({ events: events }))
 
-   }
+  }
   render() {
     console.log(this.props.activeUser)
     return <React.Fragment>
       <Route exact path="/chat" render={(props) => {
         return <ChatList chat={this.state.chat} />
       }} />
-       <Route exact path="/articles" render={(props) => {
+      <Route exact path="/articles" render={(props) => {
         return <NewsList news={this.state.news} />
       }} />
-       <Route exact path="/events" render={(props) => {
+      <Route exact path="/events" render={(props) => {
         return <EventList events={this.state.events}
-        {...props}/>
+          addEvent={this.addEvent}
+          {...props} />
       }} />
-        <Route exact path="/events/new" render={(props) => {
+      <Route exact path="/events/new" render={(props) => {
         return <EventForm events={this.state.events}
-        {...props}/>
+          addEvent={this.addEvent}
+          {...props} />
       }} />
-       <Route exact path="/tasks" render={(props) => {
+      <Route exact path="/tasks" render={(props) => {
         return <TaskList tasks={this.state.tasks} />
       }} />
 

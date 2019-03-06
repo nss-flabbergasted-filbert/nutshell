@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-
-
 class EventList extends Component {
 
     componentDidMount() {
@@ -21,11 +19,11 @@ class EventList extends Component {
           </div>
             <section className="events">
             {
-            this.props.events.map(event =>
-              <div className="event" key={event.id} >
-              <h4>{event.name}</h4>
-              <h5>{event.date}</h5>
-              <h5>{event.location}</h5>
+            this.props.events.map(events =>
+              <div className="events" key={events.id} >
+              <h4>{events.name}</h4>
+              <h5>{events.date}</h5>
+              <h5>{events.location}</h5>
               </div>
               )
             }

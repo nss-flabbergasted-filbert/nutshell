@@ -6,15 +6,14 @@ export default class EventForm extends Component {
   state = {
     name: "",
     date: "",
-    location: "",
-    userId: ""
+    location: ""
+    // userId: ""
   };
 
   // Update state whenever an input field is edited
   handleFieldChange = evt => {
     const stateToChange = {};
     stateToChange[evt.target.id] = evt.target.value;
-    debugger;
     this.setState(stateToChange);
   }
 
@@ -24,19 +23,19 @@ export default class EventForm extends Component {
      */
   constructNewEvent = evt => {
     evt.preventDefault()
-    if (this.state.event === "") {
+    if (this.state.name === "" && this.state.date === "" && this.state.location === "") {
+      alert("Please fill out form.")
     } else {
-      const event = {
+      const object = {
         name: this.state.name,
         date: this.state.date,
-        location: this.state.location
+        location: this.state.location,
         // Make sure the employeeId is saved to the database as a number since it is a foreign key.
         // userId: parseInt(this.state.userId)
       }
-
+      console.log(object)
       // Create the animal and redirect user to animal list
-      this.props
-        .post(event)
+      this.props.addEvent(object)
         .then(() => this.props.history.push("/events"));
     }
   }
@@ -52,7 +51,7 @@ export default class EventForm extends Component {
               required
               className="form-control"
               onChange={this.handleFieldChange}
-              id="eventName"
+              id="name"
               placeholder="Event"
             />
           </div>

@@ -28,6 +28,7 @@ export default Object.create(null, {
 
   post: {
     value: function(obj) {
+      console.log(obj, "api manager")
       return fetch(`${Settings.remoteURL}/${this.desiredDatabase}`, {
         method: "POST",
         headers: {
