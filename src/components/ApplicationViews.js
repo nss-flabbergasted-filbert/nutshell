@@ -6,6 +6,7 @@ import ChatList from './chat/ChatList'
 import NewsList from './news/NewsList'
 import EventList from './event/EventList'
 import TaskList from './task/TaskList'
+import EventForm from "./event/EventForm";
 
 class ApplicationViews extends Component {
   state = {
@@ -38,6 +39,10 @@ class ApplicationViews extends Component {
       }} />
        <Route exact path="/events" render={(props) => {
         return <EventList events={this.state.events}
+        {...props}/>
+      }} />
+        <Route exact path="/events/new" render={(props) => {
+        return <EventForm events={this.state.events}
         {...props}/>
       }} />
        <Route exact path="/tasks" render={(props) => {
