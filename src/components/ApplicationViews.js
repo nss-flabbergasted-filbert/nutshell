@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import { Route } from 'react-router-dom'
+import EventManager from '../modules/EventManager'
 
 import ChatList from './chat/ChatList'
 import NewsList from './news/NewsList'
@@ -14,7 +15,18 @@ class ApplicationViews extends Component {
     tasks: []
   }
 
-  componentDidMount() { }
+
+
+  deleteEvent = (id) =>
+  EventManager.deleteAndList(id)
+      // .then(EventManager.getAll)
+      .then(events => this.setState({ events: events }))
+
+  componentDidMount() {
+    EventManager.getAll()
+    .then(events => this.setState({ events: events}))
+
+   }
   render() {
     console.log(this.props.activeUser)
     return <React.Fragment>
@@ -25,7 +37,8 @@ class ApplicationViews extends Component {
         return <NewsList news={this.state.news} />
       }} />
        <Route exact path="/events" render={(props) => {
-        return <EventList events={this.state.events} />
+        return <EventList events={this.state.events}
+        {...props}/>
       }} />
        <Route exact path="/tasks" render={(props) => {
         return <TaskList tasks={this.state.tasks} />
