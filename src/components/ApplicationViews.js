@@ -7,7 +7,13 @@ import EventList from './event/EventList'
 import TaskList from './task/TaskList'
 
 class ApplicationViews extends Component {
-  state = {}
+  state = {
+    chat: [],
+    news: [],
+    events: [],
+    tasks: []
+  }
+
   componentDidMount() { }
   render() {
     console.log(this.props.activeUser)
@@ -24,7 +30,7 @@ class ApplicationViews extends Component {
        <Route exact path="/tasks" render={(props) => {
         return <TaskList tasks={this.state.tasks} />
       }} />
-      
+
 
     </React.Fragment>
   }
