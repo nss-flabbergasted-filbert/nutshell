@@ -8,10 +8,12 @@ import TaskList from './task/TaskList'
 import ArticleManager from "../modules/ArticleManager"
 import AddNewsForm from "./news/AddNewsForm";
 import NewsEditForm from "./news/NewsEditForm";
+import ChatManager from '../modules/ChatManager'
+import ChatForm from "./chat/ChatForm"
 
 class ApplicationViews extends Component {
   state = {
-    chat: [],
+    chats: [],
     news: [],
     events: [],
     tasks: []
@@ -31,18 +33,33 @@ class ApplicationViews extends Component {
       this.setState({news: news}))
   }
 
+  addChat = (message) => {
+    return ChatManager.post(message)
+    .then(() => ChatManager.getAll())
+    .then(message =>
+      this.setState({
+        chats: message
+      }))
+    }
+
   componentDidMount() {
 
     ArticleManager.getAll().then((allNews) => {
       this.setState({ news: allNews})
     })
 
-  }
+    ChatManager.getAll().then(AllChats => {
+      this.setState({chats: AllChats})
+    })
+
+}
   render() {
-    console.log(this.props.activeUser)
     return <React.Fragment>
-      <Route exact path="/chat" render={(props) => {
-        return <ChatList chat={this.state.chat} />
+      <Route exact path="/chats" render={(props) => {
+        return <ChatList chats={this.state.chats} addChat={this.addChat} {...props} />
+      }} />
+      <Route exact path="/chats/new" render={(props) => {
+        return <ChatForm chats={this.state.chats} addChat={this.addChat} {...props} />
       }} />
        <Route exact path="/articles" render={(props) => {
         return <NewsList  addNews={this.addNews}
@@ -68,8 +85,6 @@ class ApplicationViews extends Component {
        <Route exact path="/tasks" render={(props) => {
         return <TaskList tasks={this.state.tasks} />
       }} />
-
-
     </React.Fragment>
   }
 }

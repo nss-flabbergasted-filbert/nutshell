@@ -17,7 +17,7 @@ class Nav extends Component {
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/chat">Chat</Link>
+            <Link className="nav-link" to="/chats">Chats</Link>
           </li>
           <li className="nav-item">
             <Link className="nav-link" to="/articles">Articles</Link>
@@ -27,7 +27,7 @@ class Nav extends Component {
           </li>
           <li className="nav-item">
             <Link className="nav-link" to="/tasks">Tasks</Link>
-            
+
           <a className="nav-link">Aloha 🌺 {this.props.activeUser.username}</a>
           <button
             type="button"
@@ -41,5 +41,5 @@ class Nav extends Component {
         )
       }
     }
-    
+
     export default Nav
