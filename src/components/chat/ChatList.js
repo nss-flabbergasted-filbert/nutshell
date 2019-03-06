@@ -1,41 +1,27 @@
-// import React, {Component} from "react"
+import React, { Component } from "react"
 
-// export default class chatsModule extends Component {
-//     buildChatsForm: (chatId) => {
-//         return `
-//             <div id="chatsForm">
-//                 <input type="hidden" name="chatId" value="${chatId}"></input>
-//                 Enter your message:</br>
-//                 <textarea rows="4" cols="50" name="chatMessage" id="chat--textInput"></textarea></br>
-//                 <button id="chats--create">Submit</button>
-//                 <button id="chats--cancel">Cancel</button>
-//             </div>
-//         `
-//     },
-//     buildChatsObject: () => {
-//         const chatsObject = {}
-//         chatsObject.text = document.getElementById("chat--textInput").value
-//         chatsObject.timestamp = parseInt(Date.now())
-//         chatsObject.userId = parseInt(sessionStorage.getItem('userId'))
-//         return chatsObject
-//     },
-//     buildChatsHTML: (chatObject, username, userId) => {
-//         const chatTimestamp = timeConverter(chatObject.timestamp)
+export default class ChatList extends Component {
+    render() {
 
-//         let baseHTML = `
-//             <div class="chats" id="chat--${chatObject.id}">
-//                 <div class="chatTextContent">${chatObject.text}</div>
-//                 <p class="chatSubText">by <span id="${userId}">${username}</span><br/>Posted on ${chatTimestamp}</p>
-//         `
+        return (
+            <React.Fragment>
 
-//         if (chatObject.userId === userId) {
-//             baseHTML += `
-//                 <button id="chats--edit--${chatObject.id}">Edit</button>
-//             `
-//         }
-
-//         baseHTML += "</div><hr/>"
-
-//         return baseHTML
-//     }
-// }
+                <div className="newChatButton">
+                    <button type="button"
+                        onClick={() => this.props.history.push("/chats/new")}
+                        className="btn btn-success">
+                        New Chat Message
+                    </button>
+                </div>
+                <section className="chats">
+                    {
+                        this.props.chats.map(chat =>
+                            <div key={chat.id}>
+                                <section>{chat.text}</section>
+                            </div>)
+                    }
+                </section>
+            </React.Fragment>
+        )
+    }
+}
