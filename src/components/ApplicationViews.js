@@ -6,37 +6,26 @@ import NewsList from './news/NewsList'
 import EventList from './event/EventList'
 import TaskList from './task/TaskList'
 
+import TaskManager from '../modules/TaskManager'
+
 
 
 class ApplicationViews extends Component {
-  tasksFromAPI = [
-    {
-      "name": "Make lot's of activities with vague directions. ",
-      "completion_date": 1550966400000,
-      "is_complete": true,
-      "userId": 1,
-      "id": 1
-    },
-    {
-      "name": "Poop. ",
-      "completion_date": 1550966400000,
-      "is_complete": true,
-      "userId": 1,
-      "id": 2
-    },
-  ]
-  
-  state = {
-    tasks: this.tasksFromAPI
-  }
-  // state = {
-  //   chat: [],
-  //   news: [],
-  //   events: [],
-  //   tasks: []
-  // }
 
-  componentDidMount() { }
+  state = {
+    chat: [],
+    news: [],
+    events: [],
+    tasks: []
+  }
+
+  componentDidMount() { 
+    
+    TaskManager.getAll()
+    .then(tasks =>
+      this.setState({ tasks: tasks })
+  )
+  }
   render() {
     console.log(this.props.activeUser)
     return <React.Fragment>
