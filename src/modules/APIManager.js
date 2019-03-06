@@ -2,33 +2,32 @@ import Settings from "./Settings"
 
 export default Object.create(null, {
   get: {
-    value: function(id) {
+    value: function (id) {
       return fetch(`${Settings.remoteURL}/${this.desiredDatabase}/${id}`)
-      .then(r => r.json())
+        .then(r => r.json())
     }
   },
 
   getAll: {
-    value: function() {
+    value: function () {
       return fetch(`${Settings.remoteURL}/${this.desiredDatabase}`)
-      .then(r => r.json())
+        .then(r => r.json())
     }
   },
 
   deleteAndList: {
-    value: function(id) {
+    value: function (id) {
       return fetch(`${Settings.remoteURL}/${this.desiredDatabase}/${id}`, {
         method: "DELETE"
       })
-      .then(r => r.json())
-      .then(() => fetch(`${Settings.remoteURL}/${this.desiredDatabase}`))
-      .then(r => r.json())
+        .then(r => r.json())
+        .then(() => fetch(`${Settings.remoteURL}/${this.desiredDatabase}`))
+        .then(r => r.json())
     }
   },
 
   post: {
-    value: function(obj) {
-      console.log(obj, "api manager")
+    value: function (obj) {
       return fetch(`${Settings.remoteURL}/${this.desiredDatabase}`, {
         method: "POST",
         headers: {
@@ -36,12 +35,12 @@ export default Object.create(null, {
         },
         body: JSON.stringify(obj)
       })
-      .then(r => r.json())
+        .then(r => r.json())
     }
   },
 
   put: {
-    value: function(obj) {
+    value: function (obj) {
       return fetch(`${Settings.remoteURL}/${this.desiredDatabase}/${obj.id}`, {
         method: "PUT",
         headers: {
@@ -49,7 +48,9 @@ export default Object.create(null, {
         },
         body: JSON.stringify(obj)
       })
-      .then(r => r.json())
+        .then(r => r.json())
     }
   }
+
 })
+
