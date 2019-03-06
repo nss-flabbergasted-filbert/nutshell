@@ -6,13 +6,6 @@ export default class ChatList extends Component {
         return (
             <React.Fragment>
 
-                <div className="newChatButton">
-                    <button type="button"
-                        onClick={() => this.props.history.push("/chats/new")}
-                        className="btn btn-success">
-                        New Chat Message
-                    </button>
-                </div>
                 <section className="chats">
                     {
                         this.props.chats.map(chat =>
@@ -21,6 +14,13 @@ export default class ChatList extends Component {
                             </div>)
                     }
                 </section>
+                <div className="newChatButton">
+                    <button type="button"
+                        onClick={() => this.props.history.push("/chats/new")}
+                        className="btn btn-success">
+                        New Chat Message
+                    </button>
+                </div>
             </React.Fragment>
         )
     }

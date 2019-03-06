@@ -14,10 +14,10 @@ export default class ChatForm extends Component {
     }
 
     makeNewMessage = evt => {
-        evt.preventDefault();
+        evt.preventDefault()
 
         const chats = {
-            text: this.state.text,
+            text: this.state.chatMessage,
             // UserId: parseInt(this.state.UserId)
         }
 
@@ -39,7 +39,6 @@ render() {
                     onChange={this.handleFieldChange}
                     id="chatMessage"
                     placeholder="chat message" />
-                    <textarea rows="4" cols="50"></textarea>
                     <button
                         type="submit"
                         onClick={this.makeNewMessage}
