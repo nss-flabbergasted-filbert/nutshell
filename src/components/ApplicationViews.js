@@ -6,8 +6,29 @@ import NewsList from './news/NewsList'
 import EventList from './event/EventList'
 import TaskList from './task/TaskList'
 
+
+
 class ApplicationViews extends Component {
-  state = {}
+  tasksFromAPI = [
+    {
+      "name": "Make lot's of activities with vague directions. ",
+      "completion_date": 1550966400000,
+      "is_complete": true,
+      "userId": 1,
+      "id": 1
+    },
+    {
+      "name": "Poop. ",
+      "completion_date": 1550966400000,
+      "is_complete": true,
+      "userId": 1,
+      "id": 2
+    },
+  ]
+  
+  state = {
+    tasks: this.tasksFromAPI
+  }
   componentDidMount() { }
   render() {
     console.log(this.props.activeUser)
