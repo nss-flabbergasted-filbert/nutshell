@@ -5,6 +5,7 @@ import ChatList from './chat/ChatList'
 import NewsList from './news/NewsList'
 import EventList from './event/EventList'
 import TaskList from './task/TaskList'
+import ArticleManager from "../modules/ArticleManager"
 
 class ApplicationViews extends Component {
   state = {
@@ -12,6 +13,13 @@ class ApplicationViews extends Component {
     news: [],
     events: [],
     tasks: []
+  }
+
+  addNews = (newArticle) => {
+    return ArticleManager.post(newArticle)
+    .then(() => ArticleManager.getAll())
+    .then(news =>
+      this.setState({news: news}))
   }
 
   componentDidMount() { }
@@ -22,7 +30,8 @@ class ApplicationViews extends Component {
         return <ChatList chat={this.state.chat} />
       }} />
        <Route exact path="/articles" render={(props) => {
-        return <NewsList news={this.state.news} />
+        return <NewsList  addNews={this.addNews}
+                          news={this.state.news} />
       }} />
        <Route exact path="/events" render={(props) => {
         return <EventList events={this.state.events} />
