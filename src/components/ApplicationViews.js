@@ -1,7 +1,6 @@
 import React, { Component } from "react"
 import { Route } from 'react-router-dom'
 import EventManager from '../modules/EventManager'
-
 import ChatList from './chat/ChatList'
 import NewsList from './news/NewsList'
 import EventList from './event/EventList'
@@ -9,6 +8,7 @@ import TaskList from './task/TaskList'
 import EventForm from "./event/EventForm";
 import ChatManager from '../modules/ChatManager'
 import ChatForm from "./chat/ChatForm"
+import EventEditForm from "./event/EventEditForm";
 
 class ApplicationViews extends Component {
   state = {
@@ -17,7 +17,13 @@ class ApplicationViews extends Component {
     events: [],
     tasks: []
   }
-
+  updateEvent = (editedObject) => {
+    return EventManager.put(editedObject)
+      .then(() => {
+        return EventManager.getAll()
+      })
+      .then(events => this.setState({ events: events }))
+  }
   addEvent = (object) => {
     return EventManager.post(object)
       .then(() => {
@@ -28,23 +34,22 @@ class ApplicationViews extends Component {
 
   deleteEvent = (id) =>
     EventManager.deleteAndList(id)
-      // .then(EventManager.getAll)
       .then(events => this.setState({ events: events }))
 
   componentDidMount() {
     EventManager.getAll()
       .then(events => this.setState({ events: events }))
-      ChatManager.getAll().then(AllChats => {
-        this.setState({chats: AllChats})
-      })
+    ChatManager.getAll().then(AllChats => {
+      this.setState({ chats: AllChats })
+    })
 
   }
   addChat = (message) => {
     return ChatManager.post(message)
-    .then(() => ChatManager.getAll())
-    .then(message =>
+      .then(() => ChatManager.getAll())
+      .then(message =>
         this.setState({
-            chats: message
+          chats: message
         }))
   }
 
@@ -70,6 +75,13 @@ class ApplicationViews extends Component {
           addEvent={this.addEvent}
           {...props} />
       }} />
+      <Route path="/events/:eventId(\d+)/edit" render={props => {
+        return <EventEditForm
+        {...props}
+        events={this.state.events}
+        updateEvent={this.updateEvent} />
+      }}
+      />
       <Route exact path="/tasks" render={(props) => {
         return <TaskList tasks={this.state.tasks} />
       }} />

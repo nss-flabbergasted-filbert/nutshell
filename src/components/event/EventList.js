@@ -24,6 +24,12 @@ class EventList extends Component {
               <h4>{events.name}</h4>
               <h5>{events.date}</h5>
               <h5>{events.location}</h5>
+              <button type="button"
+              className="editButton"
+              onClick={() => {
+                this.props.history.push(`/events/${events.id}/edit`)
+              }}
+              >Edit </button>
               </div>
               )
             }
