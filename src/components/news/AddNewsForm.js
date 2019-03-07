@@ -20,7 +20,9 @@ export default class AddNewsForm extends Component {
           const story = {
             title: this.state.newsTitle,
             summary: this.state.newsSummary,
-            url: this.state.newsURL
+            url: this.state.newsURL,
+            timestamp: Date().split(" ").splice(0.5).join(" "),
+            userId: parseInt(sessionStorage.getItem("credentials"))
           }
 
           this.props.addNews(story)
