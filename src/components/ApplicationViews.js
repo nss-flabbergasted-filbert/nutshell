@@ -22,6 +22,7 @@ class ApplicationViews extends Component {
     tasks: []
   }
 
+
   addNews = (newArticle) => {
     return ArticleManager.post(newArticle)
       .then(() => ArticleManager.getAll())
@@ -83,6 +84,8 @@ class ApplicationViews extends Component {
     return ChatManager.deleteAndList(id)
       .then(chats => { this.setState({ chats: chats })})
   }
+
+
 
   componentDidMount() {
     EventManager.getAll().then(events =>
