@@ -65,7 +65,7 @@ export default class Login extends Component {
           onChange={this.handleFieldChange}
           type="username"
           id="username"
-          placeholder={` Something Cool`}
+          placeholder={`Something Cool`}
           required=""
           autoFocus=""
         />
