@@ -81,6 +81,8 @@ class ApplicationViews extends Component {
       this.setState({ tasks: tasks })
     )
 
+  
+
   editTask = task => {
     return TaskManager.put(task)
       .then(() => {
