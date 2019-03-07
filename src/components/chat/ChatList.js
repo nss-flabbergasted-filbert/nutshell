@@ -8,9 +8,15 @@ export default class ChatList extends Component {
 
                 <section className="chats">
                     {
-                        this.props.chats.map(chat =>
+                            this.props.chats.map(chat =>
                             <div key={chat.id}>
                                 <section>{chat.text}</section>
+                                <button type="button"
+                                className="btn btn-success"
+                                onClick={() => {
+                                this.props.history.push(`/chats/${chat.id}/edit`);
+                                }}
+                                >Edit Chat</button>
                             </div>)
                     }
                 </section>

@@ -9,6 +9,7 @@ import EventForm from "./event/EventForm";
 import ChatManager from '../modules/ChatManager'
 import ChatForm from "./chat/ChatForm"
 import EventEditForm from "./event/EventEditForm";
+import ChatEditForm from "./chat/ChatEditForm";
 
 class ApplicationViews extends Component {
   state = {
@@ -53,6 +54,12 @@ class ApplicationViews extends Component {
         }))
   }
 
+  updateChat = (editedChatObj) => {
+    return ChatManager.put(editedChatObj)
+      .then(() => ChatManager.getAll())
+      .then(chats => {this.setState({chats: chats})})
+  }
+
 
   render() {
     return <React.Fragment>
@@ -61,6 +68,9 @@ class ApplicationViews extends Component {
       }} />
       <Route exact path="/chats/new" render={(props) => {
         return <ChatForm chats={this.state.chats} addChat={this.addChat} {...props} />
+      }} />
+      <Route exact path="/chats/:chatId(\d+)/edit" render={(props) => {
+        return <ChatEditForm chats={this.state.chats} updateChat={this.updateChat} {...props} />
       }} />
       <Route exact path="/articles" render={(props) => {
         return <NewsList news={this.state.news} />
