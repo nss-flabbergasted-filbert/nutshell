@@ -43,7 +43,7 @@ export default class EventForm extends Component {
   render() {
     return (
       <React.Fragment>
-        <form className="eventForm">
+        <form onSubmit={this.constructNewEvent} className="eventForm">
           <div className="form-group">
             <label htmlFor="eventName">Event</label>
             <input
@@ -80,7 +80,6 @@ export default class EventForm extends Component {
           </div>
           <button
             type="submit"
-            onClick={this.constructNewEvent}
             className="btn btn-primary"
           >
             Submit
