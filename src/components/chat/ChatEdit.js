@@ -13,5 +13,19 @@ export default class ChatEdit extends Component {
         this.setState(stateToChange)
     }
 
-    updateExistingChat
+    updateExistingChat = evt => {
+        evt.preventDefault()
+
+        const editedChat = {
+            id: this.props.match.params.chatId,
+            text: this.state.text
+        }
+
+        this.props.updateExistingChat(editedChat)
+        .then(() => this.props.history.push("/chats"))
+    }
+
+    componentDidMount() {
+        ChatManager.get()
+    }
 }
