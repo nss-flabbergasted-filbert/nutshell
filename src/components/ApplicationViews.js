@@ -123,9 +123,6 @@ class ApplicationViews extends Component {
         }}
         />
 
-      <Route exact path="/articles" render={(props) => {
-        return <NewsList news={this.state.news} />
-      }} />
       <Route exact path="/events" render={(props) => {
         return <EventList events={this.state.events}
         addEvent={this.addEvent}
