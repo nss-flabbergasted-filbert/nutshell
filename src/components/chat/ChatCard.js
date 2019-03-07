@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import "./chat.css"
 
 export default class ChatCard extends Component {
     render() {

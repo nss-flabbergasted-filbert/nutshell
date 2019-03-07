@@ -3,8 +3,7 @@ import ChatManager from "../../modules/ChatManager"
 
 export default class ChatEdit extends Component {
     state = {
-        text: "",
-        // userId: ""
+        text: ""
     }
 
     handleFieldChange = evt => {
