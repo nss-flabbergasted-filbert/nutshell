@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import ChatManager from "../../modules/ChatManager"
-import ChatList from "./ChatList";
 
 export default class ChatEdit extends Component {
     state = {
@@ -22,7 +21,7 @@ export default class ChatEdit extends Component {
             text: this.state.text
         }
 
-        this.props.updateExistingChat(editedChat)
+        this.props.updateChat(editedChat)
         .then(() => this.props.history.push("/chats"))
     }
 
