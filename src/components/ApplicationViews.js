@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import { Route } from 'react-router-dom'
+import EventManager from '../modules/EventManager'
 
 import ChatList from './chat/ChatList'
 import NewsList from './news/NewsList'
@@ -8,6 +9,7 @@ import TaskList from './task/TaskList'
 import ArticleManager from "../modules/ArticleManager"
 import AddNewsForm from "./news/AddNewsForm";
 import NewsEditForm from "./news/NewsEditForm";
+import EventForm from "./event/EventForm";
 import ChatManager from '../modules/ChatManager'
 import ChatForm from "./chat/ChatForm"
 
@@ -33,6 +35,19 @@ class ApplicationViews extends Component {
       this.setState({news: news}))
   }
 
+  addEvent = (object) => {
+    return EventManager.post(object)
+      .then(() => {
+        return EventManager.getAll()
+      })
+      .then(events => this.setState({ events: events }))
+  }
+
+  deleteEvent = (id) =>
+    EventManager.deleteAndList(id)
+      // .then(EventManager.getAll)
+      .then(events => this.setState({ events: events }))
+
   addChat = (message) => {
     return ChatManager.post(message)
     .then(() => ChatManager.getAll())
@@ -52,9 +67,18 @@ class ApplicationViews extends Component {
       this.setState({chats: AllChats})
     })
 
+    EventManager.getAll()
+    .then(events => this.setState({ events: events }))
+    ChatManager.getAll().then(AllChats => {
+      this.setState({chats: AllChats})
+    })
+
 }
+
   render() {
-    return <React.Fragment>
+    return (
+
+      <React.Fragment>
       <Route exact path="/chats" render={(props) => {
         return <ChatList chats={this.state.chats} addChat={this.addChat} {...props} />
       }} />
@@ -65,28 +89,38 @@ class ApplicationViews extends Component {
         return <NewsList  addNews={this.addNews}
                           {...props}
                           news={this.state.news} />
-      }} />
+                        }} />
 
        <Route exact path="/articles/new" render={(props) => {
         return <AddNewsForm  addNews={this.addNews}
                              {...props}
                              news={this.state.news} />
-      }} />
+                            }} />
 
         <Route path="/articles/:articleId(\d+)/edit" render={props => {
-            return <NewsEditForm {...props} news={this.state.news} editNews={this.editNews} />
-          }}
+          return <NewsEditForm {...props} news={this.state.news} editNews={this.editNews} />
+        }}
         />
 
-
-       <Route exact path="/events" render={(props) => {
-        return <EventList events={this.state.events} />
+      <Route exact path="/articles" render={(props) => {
+        return <NewsList news={this.state.news} />
       }} />
-       <Route exact path="/tasks" render={(props) => {
+      <Route exact path="/events" render={(props) => {
+        return <EventList events={this.state.events}
+        addEvent={this.addEvent}
+        {...props} />
+      }} />
+      <Route exact path="/events/new" render={(props) => {
+        return <EventForm events={this.state.events}
+        addEvent={this.addEvent}
+        {...props} />
+      }} />
+      <Route exact path="/tasks" render={(props) => {
         return <TaskList tasks={this.state.tasks} />
       }} />
-    </React.Fragment>
+      </React.Fragment>
+    )
+    }
   }
-}
 
-export default ApplicationViews
+  export default ApplicationViews
