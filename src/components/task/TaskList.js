@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './task.css'
+import Task from './Task'
 
 
 
@@ -21,26 +22,16 @@ export default class TaskList extends Component {
                     {
                         this.props.tasks.map(task =>
                             <div className="task" key={task.id}>
-                                <h5>Task Name:{task.name}</h5>
-                                <h5>Task Completion Date:{task.date}</h5>
-                                <button
-                                    type="button"
-                                    className="editTaskButton"
-                                    onClick={() => {
-                                        this.props.history.push(`/tasks/${task.id}/edit`);
-                                    }}
-                                >Edit Task</button>
-                                
-                                    <button type="checkbox" id="isComplete" name="isComplete">
-                                        <label for="isComplete">Is Complete</label>
-                                    </button>
-
+                                <Task task={task} {...this.props}
+                                    {...this.props}
+                                    history={this.props.history} />
                                 </div>
 
                                 )
                             }
                 </section>
             </React.Fragment>
-                );
-            }
-}
+                        );
+                    }
+        }
+        
