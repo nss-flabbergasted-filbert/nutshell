@@ -4,7 +4,7 @@ export default class ChatForm extends Component {
 
     state = {
         text: "",
-        userId: ""
+        // userId: ""
     }
 
     handleFieldChange = evt => {
@@ -18,7 +18,7 @@ export default class ChatForm extends Component {
 
         const chats = {
             text: this.state.chatMessage,
-            userId: parseInt(this.state.userId)
+            // userId: parseInt(this.state.userId)
         }
 
         this.props
