@@ -27,7 +27,7 @@ export default class NewsList extends Component {
                   className="btn btn-success"
                   onClick={() => {
                     this.props.history.push(
-                      `/articles/${this.props.article.id}/edit`
+                      `/articles/${article.id}/edit`
                     );
                   }}
                 >
