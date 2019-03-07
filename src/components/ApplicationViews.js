@@ -75,8 +75,11 @@ class ApplicationViews extends Component {
         this.setState({ tasks: tasks })
       )
 
-  deleteTask = task =>
+  deleteTask = task => 
     TaskManager.deleteAndList(task)
+    .then(tasks =>
+      this.setState({ tasks: tasks })
+    )
 
   editTask = task => {
     return TaskManager.put(task)
@@ -160,7 +163,7 @@ class ApplicationViews extends Component {
       }}
       />
       <Route exact path="/tasks" render={(props) => {
-        return <TaskList tasks={this.state.tasks} {...props} />
+        return <TaskList tasks={this.state.tasks} deleteTask={this.deleteTask}{...props} />
       }} />
       <Route exact path="/tasks/new" render={(props) => {
         return <TaskForm {...props}
