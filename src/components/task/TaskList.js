@@ -22,7 +22,7 @@ export default class TaskList extends Component {
                         this.props.tasks.map(task =>
                             <div className="task" key={task.id}>
                                 <h5>Task Name:{task.name}</h5>
-                                <h5>Task Completion Date:{task.completion_date}</h5>
+                                <h5>Task Completion Date:{task.date}</h5>
                                 <button
                                     type="button"
                                     className="editTaskButton"
@@ -30,12 +30,17 @@ export default class TaskList extends Component {
                                         this.props.history.push(`/tasks/${task.id}/edit`);
                                     }}
                                 >Edit Task</button>
-                            </div>
+                                
+                                    <button type="checkbox" id="isComplete" name="isComplete">
+                                        <label for="isComplete">Is Complete</label>
+                                    </button>
 
-                        )
-                    }
+                                </div>
+
+                                )
+                            }
                 </section>
             </React.Fragment>
-        );
-    }
+                );
+            }
 }

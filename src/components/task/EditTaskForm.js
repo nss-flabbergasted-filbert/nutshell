@@ -18,9 +18,7 @@ export default class EditTaskForm extends Component {
     updateExistingTask = evt => {
       evt.preventDefault()
 
-      if (this.state.task === "") {
-        window.alert("Please select a caretaker");
-      } else {
+    
         const editedTask = {
           id: this.props.match.params.taskId,
           name: this.state.name,
@@ -30,10 +28,10 @@ export default class EditTaskForm extends Component {
     this.props.editTask(editedTask)
     .then(() => this.props.history.push("/tasks"))      
     }
-  }
+  
 
     componentDidMount() {
-      TaskManager.getAll(this.props.match.params.taskId)
+      TaskManager.get(this.props.match.params.taskId)
       .then(task => {
         this.setState({
           name: task.name,
@@ -66,7 +64,8 @@ export default class EditTaskForm extends Component {
              className="form-control"
              onChange={this.handleFieldChange}
              id="date"
-             placeholder="Date"
+            //  placeholder="Date"
+             value = {this.state.date}
            />
          </div>
             <button

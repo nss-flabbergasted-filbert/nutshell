@@ -51,8 +51,13 @@ class ApplicationViews extends Component {
   deleteTask = task =>
     TaskManager.deleteAndList(task)
 
-  editTask = task =>
-    TaskManager.put(task)
+  editTask = task => {
+    return TaskManager.put(task)
+    .then(() => {
+      return TaskManager.getAll()
+    })
+    .then(tasks => this.setState({tasks : tasks}))
+  }
 
   addChat = (message) => {
     return ChatManager.post(message)
@@ -105,7 +110,7 @@ class ApplicationViews extends Component {
       }}
       />
       <Route exact path="/tasks" render={(props) => {
-        return <TaskList tasks={this.state.tasks} />
+        return <TaskList tasks={this.state.tasks} {...props} />
       }} />
           <Route exact path="/tasks/new" render={(props) => {
       return <TaskForm {...props}
