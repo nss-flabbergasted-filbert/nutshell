@@ -73,13 +73,12 @@ export default class EventEditForm extends Component {
               className="form-control"
               onChange={this.handleFieldChange}
               id="date"
-              // value={this.state.date}
+              value={this.state.date}
             />
           </div>
           <div className="form-group">
             <label htmlFor="location">Location</label>
             <input
-              defaultValue=""
               className="form-control"
               onChange={this.handleFieldChange}
               id="location"

@@ -30,6 +30,11 @@ class EventList extends Component {
                 this.props.history.push(`/events/${events.id}/edit`)
               }}
               >Edit </button>
+               <button type="button"
+              className="deleteButton"
+              onClick={() => this.props.deleteEvent(events.id)
+                .then(() => this.props.history.push(`/events`))}
+              >Delete </button>
               </div>
               )
             }

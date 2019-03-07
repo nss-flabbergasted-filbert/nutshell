@@ -51,10 +51,10 @@ class ApplicationViews extends Component {
       .then(events => this.setState({ events: events }))
   }
 
-  deleteEvent = (id) =>
-    EventManager.deleteAndList(id)
+  deleteEvent = (id) => {
+   return EventManager.deleteAndList(id)
       .then(events => this.setState({ events: events }))
-
+  }
   addChat = (message) => {
     return ChatManager.post(message)
       .then(() => ChatManager.getAll())
@@ -125,26 +125,27 @@ class ApplicationViews extends Component {
         }}
         />
 
-        <Route exact path="/events" render={(props) => {
-          return <EventList events={this.state.events}
-            addEvent={this.addEvent}
-            {...props} />
-        }} />
-        <Route exact path="/events/new" render={(props) => {
-          return <EventForm events={this.state.events}
-            addEvent={this.addEvent}
-            {...props} />
-        }} />
-        <Route path="/events/:eventId(\d+)/edit" render={props => {
-          return <EventEditForm
-            {...props}
-            events={this.state.events}
-            updateEvent={this.updateEvent} />
-        }}
-        />
-        <Route exact path="/tasks" render={(props) => {
-          return <TaskList tasks={this.state.tasks} />
-        }} />
+      <Route exact path="/events" render={(props) => {
+        return <EventList events={this.state.events}
+        addEvent={this.addEvent}
+        deleteEvent={this.deleteEvent}
+        {...props} />
+      }} />
+      <Route exact path="/events/new" render={(props) => {
+        return <EventForm events={this.state.events}
+        addEvent={this.addEvent}
+        {...props} />
+      }} />
+      <Route path="/events/:eventId(\d+)/edit" render={props => {
+        return <EventEditForm
+        {...props}
+        events={this.state.events}
+        updateEvent={this.updateEvent} />
+      }}
+      />
+      <Route exact path="/tasks" render={(props) => {
+        return <TaskList tasks={this.state.tasks} />
+      }} />
       </React.Fragment>
     )
   }
