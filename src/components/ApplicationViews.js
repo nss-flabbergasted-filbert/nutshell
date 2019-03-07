@@ -50,10 +50,10 @@ class ApplicationViews extends Component {
       .then(events => this.setState({ events: events }))
   }
 
-  deleteEvent = (id) =>
-    EventManager.deleteAndList(id)
+  deleteEvent = (id) => {
+   return EventManager.deleteAndList(id)
       .then(events => this.setState({ events: events }))
-
+  }
   addChat = (message) => {
     return ChatManager.post(message)
     .then(() => ChatManager.getAll())
@@ -126,6 +126,7 @@ class ApplicationViews extends Component {
       <Route exact path="/events" render={(props) => {
         return <EventList events={this.state.events}
         addEvent={this.addEvent}
+        deleteEvent={this.deleteEvent}
         {...props} />
       }} />
       <Route exact path="/events/new" render={(props) => {
