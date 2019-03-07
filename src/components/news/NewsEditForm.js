@@ -18,11 +18,11 @@ export default class NewsEditForm extends Component {
 
     updateExistingArticle = evt => {
         evt.preventDefault()
-        let editedArticle = {
-            id: this.match.params.articleId,
+        const editedArticle = {
             title: this.state.newsTitle,
             summary: this.state.newsSummary,
-            url: this.state.newsURL
+            url: this.state.newsURL,
+            id: this.match.params.articleId
         };
 
         this.props.editNews(editedArticle)
@@ -64,6 +64,7 @@ export default class NewsEditForm extends Component {
                               onChange={this.handleFieldChange}
                               id="newsSummary"
                               placeholder="News Summary"
+                              value={this.state.newsSummary}
                           />
                       </div>
                       <div className="form-group">
@@ -75,6 +76,7 @@ export default class NewsEditForm extends Component {
                               onChange={this.handleFieldChange}
                               id="newsURL"
                               placeholder="News Story URL"
+                              value={this.state.newsURL}
                           />
                       </div>
                         </form>
