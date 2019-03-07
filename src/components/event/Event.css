@@ -1,0 +1,9 @@
+.event:first-of-type{
+  background: pink;
+  font-weight: bold;
+}
+
+.event p {
+  margin: 0px;
+  padding: 0px;
+}

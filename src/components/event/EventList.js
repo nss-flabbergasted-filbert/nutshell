@@ -20,10 +20,10 @@ class EventList extends Component {
             <section className="events">
             {
             this.props.events.map(events =>
-              <div className="events" key={events.id} >
-              <h4>{events.name}</h4>
-              <h5>{events.date}</h5>
-              <h5>{events.location}</h5>
+              <div className="event" key={events.id} >
+              <p>{events.name}</p>
+              <p>{events.date}</p>
+              <p>{events.location}</p>
               <button type="button"
               className="editButton"
               onClick={() => {
