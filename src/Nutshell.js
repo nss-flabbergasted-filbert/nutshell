@@ -1,6 +1,8 @@
 import React, { Component } from "react"
 import IsAuth from "./components/Auth/IsAuth"
 
+import "bootstrap/dist/css/bootstrap.min.css"
+
 
 class Nutshell extends Component {
   // a function that return true if the session Storage object contains the key credentials and false if it does not.
