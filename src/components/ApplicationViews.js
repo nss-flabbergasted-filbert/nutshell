@@ -73,6 +73,11 @@ class ApplicationViews extends Component {
       }))
     }
 
+  deleteNews = (id) => {
+    return ArticleManager.deleteAndList(id)
+    .then(news => this.setState({ news: news}))
+  }
+
     componentDidMount() {
       EventManager.getAll()
         .then(events => this.setState({ events: events }))
@@ -109,6 +114,7 @@ class ApplicationViews extends Component {
        <Route exact path="/articles" render={(props) => {
         return <NewsList  addNews={this.addNews}
                           {...props}
+                          deleteNews={this.deleteNews}
                           news={this.state.news} />
                         }} />
 
