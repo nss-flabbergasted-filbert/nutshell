@@ -6,8 +6,8 @@ export default class EventForm extends Component {
   state = {
     name: "",
     date: "",
-    location: ""
-    // userId: ""
+    location: "",
+    userId: ""
   };
 
   // Update state whenever an input field is edited
@@ -17,10 +17,6 @@ export default class EventForm extends Component {
     this.setState(stateToChange);
   }
 
-  /*
-        Local method for validation, creating animal object, and
-        invoking the function reference passed from parent component
-     */
   constructNewEvent = evt => {
     evt.preventDefault()
     if (this.state.name === "" && this.state.date === "" && this.state.location === "") {
@@ -30,11 +26,10 @@ export default class EventForm extends Component {
         name: this.state.name,
         date: this.state.date,
         location: this.state.location,
-        // Make sure the employeeId is saved to the database as a number since it is a foreign key.
-        // userId: parseInt(this.state.userId)
+        userId: parseInt(sessionStorage.getItem("credentials"))
       }
       console.log(object)
-      // Create the animal and redirect user to animal list
+
       this.props.addEvent(object)
         .then(() => this.props.history.push("/events"));
     }

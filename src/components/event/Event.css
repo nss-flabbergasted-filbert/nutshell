@@ -1,0 +1,15 @@
+.event:first-of-type{
+  background: pink;
+  font-weight: bold;
+}
+
+.event p {
+  margin: 10px;
+  padding: 0px;
+}
+
+.editButton {
+  margin:7px;
+}
+
+
