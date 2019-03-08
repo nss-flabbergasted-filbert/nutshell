@@ -22,6 +22,8 @@ export default class NewsList extends Component {
                 <div>Title: {article.title}</div>
                 <div>Synopsis: {article.summary}</div>
                 <div>Link: {article.url}</div>
+                <div>Date: {article.timestamp}</div>
+                <div>userId: {article.userId}</div>
                 <button
                   type="button"
                   className="btn btn-success"
