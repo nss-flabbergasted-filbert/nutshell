@@ -70,5 +70,12 @@ export default Object.create(null, {
       })
         .then(r => r.json())
     }
+  },
+
+  sortArticles: {
+    value: function (activeUser) {
+      return fetch(`${Settings.remoteURL}/articles?/userId=${activeUser}&_sort=timestamp&_order=desc`)
+        .then(r => r.json())
+    }
   }
 })
