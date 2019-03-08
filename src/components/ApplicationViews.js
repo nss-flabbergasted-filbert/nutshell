@@ -137,7 +137,7 @@ class ApplicationViews extends Component {
     ChatManager.getAll().then(AllChats => {
       this.setState({ chats: AllChats });
     });
-    EventManager.getAll().then(events => this.setState({ events: events }));
+    EventManager.getEventsSorted().then(events => this.setState({ events: events }));
 
     ArticleManager.getAll().then(allNews => {
       this.setState({ news: allNews })
