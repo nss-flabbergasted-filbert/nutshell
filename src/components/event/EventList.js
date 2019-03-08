@@ -25,13 +25,13 @@ class EventList extends Component {
               <p>{events.date}</p>
               <p>{events.location}</p>
               <button type="button"
-              className="editButton"
+              className="btn btn-success"
               onClick={() => {
                 this.props.history.push(`/events/${events.id}/edit`)
               }}
               >Edit </button>
                <button type="button"
-              className="deleteButton"
+              className="btn red-btn-success"
               onClick={() => this.props.deleteEvent(events.id)
                 .then(() => this.props.history.push(`/events`))}
               >Delete </button>

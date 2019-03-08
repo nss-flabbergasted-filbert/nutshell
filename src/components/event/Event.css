@@ -8,8 +8,14 @@
   padding: 0px;
 }
 
-.editButton {
-  margin:7px;
+.events {
+  background: lightgoldenrodyellow;
+  margin: 5px;
+  padding: 10px;
+  border: 1.5px solid black;
+  border-radius: 10px;
+  box-shadow: 2px 2px
 }
+
 
 
