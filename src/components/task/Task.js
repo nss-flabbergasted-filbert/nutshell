@@ -3,8 +3,7 @@ import React, { Component } from 'react'
 
 export default class Task extends Component {
   
-    // let users = this.props.users
-    // .find(user => parseInt(user.id) === parseInt(this.props.task.userId)) || {}
+
 
         state = {
             isComplete: false,
@@ -26,6 +25,7 @@ export default class Task extends Component {
     }
 
     render() {
+
         return (
             <React.Fragment>
                 <div className="task" key={this.props.task.id}>
