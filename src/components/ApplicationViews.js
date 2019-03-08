@@ -199,6 +199,8 @@ class ApplicationViews extends Component {
                 addNews={this.addNews}
                 {...props}
                 news={this.state.news}
+                users={this.state.users}
+                deleteNews={this.deleteNews}
               />
             );
           }}

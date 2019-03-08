@@ -2,6 +2,10 @@ import React, { Component } from "react";
 
 export default class NewsList extends Component {
   render() {
+
+    let user = this.props.users
+            .find(user => parseInt(user.id) === parseInt(this.props.articles.userId)) || {}
+
     return (
       <React.Fragment>
         <section className="newsList">
@@ -23,7 +27,7 @@ export default class NewsList extends Component {
                 <div>Synopsis: {article.summary}</div>
                 <div>Link: {article.url}</div>
                 <div>Date: {article.timestamp}</div>
-                <div>userId: {article.userId}</div>
+                <div>Posted By: {user.username}</div>
                 <button
                   type="button"
                   className="btn btn-success"
