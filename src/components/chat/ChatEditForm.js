@@ -1,11 +1,9 @@
 import React, { Component } from "react"
+import ChatManager from "../../modules/ChatManager"
 
-export default class ChatForm extends Component {
-
+export default class ChatEdit extends Component {
     state = {
-        text: "",
-        date: "",
-        userId: ""
+        text: ""
     }
 
     handleFieldChange = evt => {
@@ -14,24 +12,28 @@ export default class ChatForm extends Component {
         this.setState(stateToChange)
     }
 
-    makeNewMessage = evt => {
+    updateExistingChat = evt => {
         evt.preventDefault()
 
-        const chats = {
-            text: this.state.chatMessage,
-            date: Date().split(" ").splice(0, 5).join(" "),
-            userId: parseInt(sessionStorage.getItem("credentials"))
+        const editedChat = {
+            id: this.props.match.params.chatId,
+            text: this.state.text
         }
 
-        this.props
-            .addChat(chats)
-            .then(() => this.props.history.push("/chats"));
+        this.props.updateChat(editedChat)
+        .then(() => this.props.history.push("/chats"))
     }
 
+    componentDidMount() {
+        ChatManager.get(this.props.match.params.chatId)
+        .then(chat => {
+            this.setState({text: chat.text})
+        })
+    }
 
-render() {
-    return (
-        <React.Fragment>
+    render() {
+        return (
+            <React.Fragment>
             <form className="chatForm">
                 <div className="form-group">
                     <input
@@ -39,16 +41,17 @@ render() {
                     required
                     className="form-control"
                     onChange={this.handleFieldChange}
-                    id="chatMessage"
+                    id="text"
                     placeholder="chat message"
+                    value={this.state.text}
                     />
                     <button
                         type="submit"
-                        onClick={this.makeNewMessage}
+                        onClick={this.updateExistingChat}
                         className="btn btn-primary">Submit</button>
                 </div>
             </form>
         </React.Fragment>
-    )
-}
+        )
+    }
 }
