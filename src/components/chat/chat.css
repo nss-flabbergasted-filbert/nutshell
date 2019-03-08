@@ -1,0 +1,18 @@
+.chats {
+    height: 600px;
+    width: 80%;
+    display: flex;
+    background-color: red;
+}
+
+#message {
+    background-color: red;
+}
+
+.btn-success {
+    background-color: teal;
+}
+
+.btn:hover {
+    background-color: darkblue;
+}
