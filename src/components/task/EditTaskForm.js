@@ -2,10 +2,11 @@ import React, { Component } from "react"
 import TaskManager from "../../modules/TaskManager"
 
 export default class EditTaskForm extends Component {
-    // Set initial state
+    
     state = {
       name: "",
       date: "",
+      isComplete: false
     }
 
 
@@ -22,7 +23,8 @@ export default class EditTaskForm extends Component {
         const editedTask = {
           id: this.props.match.params.taskId,
           name: this.state.name,
-          date: this.state.date
+          date: this.state.date,
+          isComplete: this.state.isComplete
         };
 
     this.props.editTask(editedTask)
@@ -36,9 +38,11 @@ export default class EditTaskForm extends Component {
         this.setState({
           name: task.name,
           date: task.date,
+          isComplete: task.isComplete
         });
       });
     }
+
 
 
     render() {
@@ -64,7 +68,6 @@ export default class EditTaskForm extends Component {
              className="form-control"
              onChange={this.handleFieldChange}
              id="date"
-            //  placeholder="Date"
              value = {this.state.date}
            />
          </div>

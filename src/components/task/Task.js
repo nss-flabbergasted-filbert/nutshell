@@ -37,22 +37,22 @@ export default class Task extends Component {
                             this.props.history.push(`/tasks/${this.props.task.id}/edit`);
                         }}
                     >Edit Task</button>
-                    {/* <form className="taskForm">
-                        <div className="form-group"> */}
+                    <form className="taskForm">
+                        <div className="form-group">
                     <label htmlFor="isComplete">Is Complete</label>
                     <input type="checkbox"
                         required
                         className="form-control"
 
                         name="isComplete"
-                        // checked={this.state.isComplete}
+                    
                         onClick={() => this.props.taskCompleted(this.props.task.id)}
                     >
                     </input>
                 </div>
-                {/* </form> */}
+                </form> 
 
-                {/* </div> */}
+                 </div> 
             </React.Fragment >
         )
     }
