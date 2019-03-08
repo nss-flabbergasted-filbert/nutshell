@@ -57,5 +57,18 @@ export default Object.create(null, {
       })
         .then(r => r.json())
     }
+  },
+
+  patch: {
+    value: function (editedTask) {
+      return fetch(`${Settings.remoteURL}/${this.desiredDatabase}/${editedTask.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(editedTask)
+      })
+        .then(r => r.json())
+    }
   }
 })
