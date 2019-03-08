@@ -33,7 +33,7 @@ class Nav extends Component {
           className="nav-link">Aloha 🌺 {this.props.activeUser.username}
           <button
             type="button"
-            className="logoutButton"
+            className="button"
             onClick={this.logout}>
             Logout
         </button>
