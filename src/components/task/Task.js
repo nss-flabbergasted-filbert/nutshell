@@ -3,6 +3,9 @@ import React, { Component } from 'react'
 
 export default class Task extends Component {
   
+    // let users = this.props.users
+    // .find(user => parseInt(user.id) === parseInt(this.props.task.userId)) || {}
+
         state = {
             isComplete: false,
         };
