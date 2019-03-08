@@ -13,6 +13,7 @@ import ChatManager from "../modules/ChatManager";
 import ChatForm from "./chat/ChatForm";
 import EventEditForm from "./event/EventEditForm";
 import ChatEditForm from "./chat/ChatEditForm";
+import UserManager from "../modules/UserManager"
 
 import TaskManager from "../modules/TaskManager";
 
@@ -25,8 +26,9 @@ class ApplicationViews extends Component {
     chats: [],
     news: [],
     events: [],
-    tasks: []
-  };
+    tasks: [],
+    users: []
+  }
 
   addNews = newArticle => {
     return ArticleManager.post(newArticle)
@@ -138,8 +140,9 @@ class ApplicationViews extends Component {
     EventManager.getAll().then(events => this.setState({ events: events }));
 
     ArticleManager.getAll().then(allNews => {
-      this.setState({ news: allNews });
-    });
+      this.setState({ news: allNews })
+    })
+    UserManager.getAll().then(users => this.setState({users: users}))
   }
 
   render() {
@@ -156,6 +159,7 @@ class ApplicationViews extends Component {
                 deleteChat={this.deleteChat}
                 updateChat={this.updateChat}
                 {...props}
+                users={this.state.users}
               />
             );
           }}

@@ -15,6 +15,13 @@ export default Object.create(null, {
     }
   },
 
+  getEventsSorted: {
+    value: function (activeUser) {
+      return fetch(`${Settings.remoteURL}/events?/userId=${activeUser}&_sort=date&_order=asc`)
+        .then(r => r.json())
+    }
+  },
+
   deleteAndList: {
     value: function (id) {
       return fetch(`${Settings.remoteURL}/${this.desiredDatabase}/${id}`, {
@@ -64,6 +71,4 @@ export default Object.create(null, {
         .then(r => r.json())
     }
   }
-
 })
-
