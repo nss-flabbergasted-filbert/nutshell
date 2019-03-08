@@ -9,7 +9,7 @@ export default class ChatCard extends Component {
             .find(user => parseInt(user.id) === parseInt(this.props.chat.userId)) || {}
 
         return (
-            <div key={this.props.chat.id} className="card">
+            <div key={this.props.chat.id} className="chat_card">
                 <div className="card-body">
                         {user.username}: {this.props.chat.text}
                     <h5 className="card-title">

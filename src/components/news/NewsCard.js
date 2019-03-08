@@ -8,7 +8,7 @@ export default class NewsCard extends Component {
             .find(user => parseInt(user.id) === parseInt(this.props.article.userId)) || {}
 
         return (
-            <div key={article.id} className="card">
+            <div key={article.id} className="news_card">
                 <div className="card-body">
                     <div key={article.id}>
                         <div>Title: {article.title}</div>
