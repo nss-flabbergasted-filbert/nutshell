@@ -68,6 +68,12 @@ class ApplicationViews extends Component {
       .then(() => TaskManager.getAll())
       .then(tasks => this.setState({ tasks: tasks }));
 
+
+  deleteNews = (id) => {
+    return ArticleManager.deleteAndList(id)
+    .then(news => this.setState({ news: news}))
+  }
+
   deleteTask = task =>
     TaskManager.deleteAndList(task).then(tasks =>
       this.setState({ tasks: tasks })
@@ -193,6 +199,8 @@ class ApplicationViews extends Component {
                 addNews={this.addNews}
                 {...props}
                 news={this.state.news}
+                users={this.state.users}
+                deleteNews={this.deleteNews}
               />
             );
           }}
