@@ -17,7 +17,7 @@ export default class ChatList extends Component {
                     <article id="message">
                         {
                             this.props.chats.map(chat =>
-                                <ChatCard key={chat.id} chat={chat} updateChat={this.props.updateChat} deleteChat={this.props.deleteChat}{...this.props} />
+                                <ChatCard key={chat.id} chat={chat} updateChat={this.props.updateChat} deleteChat={this.props.deleteChat} users={this.props.users} {...this.props} />
                             )}
                     </article>
                 </section>

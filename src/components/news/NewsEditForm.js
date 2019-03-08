@@ -22,11 +22,13 @@ export default class NewsEditForm extends Component {
             title: this.state.newsTitle,
             summary: this.state.newsSummary,
             url: this.state.newsURL,
-            id: this.match.params.articleId
+            timestamp: this.state.timestamp,
+            userId: parseInt(sessionStorage.getItem("credentials")),
+            id: this.props.match.params.articleId
         };
 
         this.props.editNews(editedArticle)
-        .then(() => this.props.history.push("./articles"))
+        .then(() => this.props.history.push("/articles"))
 
     }
             componentDidMount() {
@@ -35,7 +37,9 @@ export default class NewsEditForm extends Component {
                     this.setState({
                         newsTitle: article.title,
                         newsSummary: article.summary,
-                        newsURL: article.url
+                        newsURL: article.url,
+                        timestamp: article.timestamp,
+                        id: this.props.match.params.articleId
                     })
                 })
             }
@@ -79,6 +83,13 @@ export default class NewsEditForm extends Component {
                               value={this.state.newsURL}
                           />
                       </div>
+                      <button
+            type="submit"
+            onClick={this.updateExistingArticle}
+            className="btn btn-primary"
+          >
+            Submit
+          </button>
                         </form>
             </React.Fragment>
         )
