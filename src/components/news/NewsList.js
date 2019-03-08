@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./NewsList.css"
 import NewsCard from "./NewsCard"
 
 export default class NewsList extends Component {

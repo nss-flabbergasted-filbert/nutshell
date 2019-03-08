@@ -13,7 +13,7 @@ export default class NewsCard extends Component {
                     <div key={article.id}>
                         <div>Title: {article.title}</div>
                         <div>Synopsis: {article.summary}</div>
-                        <div>Link: {article.url}</div>
+                        <div> <a href={`${article.url}`}>Read Article </a> </div>
                         <div>Date: {article.timestamp}</div>
                         <div>Posted By: {user.username}</div>
                         <button
@@ -28,7 +28,7 @@ export default class NewsCard extends Component {
                         <button
                             onClick={() => this.props.deleteNews(article.id)
                                 .then(() => this.props.history.push("/articles"))}
-                            className="card-link">Delete</button>
+                            className="btn red-btn-success">Delete</button>
                     </div>
 
                 </div>
