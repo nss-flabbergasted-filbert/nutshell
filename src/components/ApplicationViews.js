@@ -185,6 +185,7 @@ class ApplicationViews extends Component {
               <ChatEditForm
                 chats={this.state.chats}
                 updateChat={this.updateChat}
+                users={this.state.users}
                 {...props}
               />
             );
