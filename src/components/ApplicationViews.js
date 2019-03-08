@@ -75,13 +75,13 @@ class ApplicationViews extends Component {
         this.setState({ tasks: tasks })
       )
 
-  deleteTask = task => 
+  deleteTask = task =>
     TaskManager.deleteAndList(task)
-    .then(tasks =>
-      this.setState({ tasks: tasks })
-    )
+      .then(tasks =>
+        this.setState({ tasks: tasks })
+      )
 
-  
+
 
   editTask = task => {
     return TaskManager.put(task)
@@ -91,95 +91,119 @@ class ApplicationViews extends Component {
       .then(tasks => this.setState({ tasks: tasks }))
   }
 
-
-  addChat = (message) => {
-    return ChatManager.post(message)
-      .then(() => ChatManager.getAll())
-      .then(message =>
-        this.setState({
-          chats: message
-        }))
+  patchTask = editedTask => {
+    return TaskManager.patch(editedTask) //create a patch call in API manager
+      .then(() => {
+        return TaskManager.getAll()
+      })
+      .then(tasks => this.setState({ tasks: tasks }))
   }
 
+  taskCompleted = (id) => {
 
-  componentDidMount() {
-    TaskManager.getAll()
-      .then(tasks =>
-        this.setState({ tasks: tasks })
-      )
-
-    ChatManager.getAll().then(AllChats => {
-      this.setState({ chats: AllChats })
-    })
-    EventManager.getAll()
-      .then(events => this.setState({ events: events }))
-    ChatManager.getAll().then(AllChats => {
-      this.setState({ chats: AllChats })
-    })
+    const taskToChange = {
+      id: id,
+      isCompleted: true
+    }
+    this.patchTask(taskToChange)
+      .then(() => {
+        return TaskManager.getAll()
+      })
+      .then(tasks => this.setState({ tasks: tasks }))
   }
 
 
 
-  render() {
+addChat = (message) => {
+  return ChatManager.post(message)
+    .then(() => ChatManager.getAll())
+    .then(message =>
+      this.setState({
+        chats: message
+      }))
+}
 
-   return <React.Fragment>
-      <Route exact path="/chats" render={(props) => {
-        return <ChatList chats={this.state.chats} addChat={this.addChat} {...props} />
-      }} />
-      <Route exact path="/chats/new" render={(props) => {
-        return <ChatForm chats={this.state.chats} addChat={this.addChat} {...props} />
-      }} />
-      <Route exact path="/articles" render={(props) => {
-        return <NewsList addNews={this.addNews}
-          {...props}
-          news={this.state.news} />
+
+componentDidMount() {
+  TaskManager.getAll()
+    .then(tasks =>
+      this.setState({ tasks: tasks })
+    )
+
+  ChatManager.getAll().then(AllChats => {
+    this.setState({ chats: AllChats })
+  })
+  EventManager.getAll()
+    .then(events => this.setState({ events: events }))
+  ChatManager.getAll().then(AllChats => {
+    this.setState({ chats: AllChats })
+  })
+}
+
+
+
+render() {
+
+  return (
+  <React.Fragment>
+    <Route exact path="/chats" render={(props) => {
+      return <ChatList chats={this.state.chats} addChat={this.addChat} {...props} />
+    }} />
+    <Route exact path="/chats/new" render={(props) => {
+      return <ChatForm chats={this.state.chats} addChat={this.addChat} {...props} />
+    }} />
+    <Route exact path="/articles" render={(props) => {
+      return <NewsList addNews={this.addNews}
+        {...props}
+        news={this.state.news} />
+    }} />
+
+    <Route exact path="/articles/new" render={(props) => {
+      return <AddNewsForm addNews={this.addNews}
+        {...props}
+        news={this.state.news} />
+    }} />
+
+    <Route path="/articles/:articleId(\d+)/edit" render={props => {
+      return <NewsEditForm {...props} news={this.state.news} editNews={this.editNews} />
+    }}
+    />
+
+    <Route exact path="/events" render={(props) => {
+      return <EventList events={this.state.events}
+        addEvent={this.addEvent}
+        deleteEvent={this.deleteEvent}
+        {...props} />
+    }} />
+    <Route exact path="/events/new" render={(props) => {
+      return <EventForm events={this.state.events}
+        addEvent={this.addEvent}
+        {...props} />
+    }} />
+    <Route path="/events/:eventId(\d+)/edit" render={props => {
+      return <EventEditForm
+        {...props}
+        events={this.state.events}
+        updateEvent={this.updateEvent} />
+    }}
+    />
+    <Route exact path="/tasks" render={(props) => {
+      return <TaskList tasks={this.state.tasks} deleteTask={this.deleteTask} taskCompleted={this.taskCompleted}
+        patchTask={this.patchTask}{...props} />
+    }} />
+    <Route exact path="/tasks/new" render={(props) => {
+      return <TaskForm {...props}
+        addTask={this.addTask} {...props}
+        tasks={this.state.tasks} {...props} />
+    }} />
+    <Route
+      path="/tasks/:taskId(\d+)/edit" render={props => {
+        return <EditTaskForm {...props} tasks={this.state.tasks} editTask={this.editTask} />
       }} />
 
-      <Route exact path="/articles/new" render={(props) => {
-        return <AddNewsForm addNews={this.addNews}
-          {...props}
-          news={this.state.news} />
-      }} />
-
-      <Route path="/articles/:articleId(\d+)/edit" render={props => {
-        return <NewsEditForm {...props} news={this.state.news} editNews={this.editNews} />
-      }}
-      />
-
-      <Route exact path="/events" render={(props) => {
-        return <EventList events={this.state.events}
-          addEvent={this.addEvent}
-          deleteEvent={this.deleteEvent}
-          {...props} />
-      }} />
-      <Route exact path="/events/new" render={(props) => {
-        return <EventForm events={this.state.events}
-          addEvent={this.addEvent}
-          {...props} />
-      }} />
-      <Route path="/events/:eventId(\d+)/edit" render={props => {
-        return <EventEditForm
-          {...props}
-          events={this.state.events}
-          updateEvent={this.updateEvent} />
-      }}
-      />
-      <Route exact path="/tasks" render={(props) => {
-        return <TaskList tasks={this.state.tasks} deleteTask={this.deleteTask}{...props} />
-      }} />
-      <Route exact path="/tasks/new" render={(props) => {
-        return <TaskForm {...props}
-          addTask={this.addTask} {...props}
-          tasks={this.state.tasks} {...props} />
-      }} />
-      <Route
-        path="/tasks/:taskId(\d+)/edit" render={props => {
-          return <EditTaskForm {...props} tasks={this.state.tasks} editTask={this.editTask} />
-        }} />
-
-    </React.Fragment>
-
-  }
+  </React.Fragment>
+)
+}
 }
 
 

@@ -24,6 +24,7 @@ export default class TaskList extends Component {
                             <div className="task" key={task.id}>
                                 <Task task={task} {...this.props}
                                     {...this.props}
+                                    taskCompleted={this.props.taskCompleted}
                                     history={this.props.history} />
                                 </div>
 
