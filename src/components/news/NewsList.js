@@ -22,8 +22,6 @@ export default class NewsList extends Component {
                 <div>Title: {article.title}</div>
                 <div>Synopsis: {article.summary}</div>
                 <div>Link: {article.url}</div>
-                <div>Date: {article.timestamp}</div>
-                <div>User: {article.userId}</div>
                 <button
                   type="button"
                   className="btn btn-success"
@@ -37,8 +35,8 @@ export default class NewsList extends Component {
                 </button>
                 <button
                             onClick={() => this.props.deleteNews(article.id)
-                                            .then(() => this.props.history.push("/articles"))}
-                            className="card-link">Delete</button>
+                                .then(() => this.props.history.push("/articles"))}
+                                className="card-link">Delete</button>
               </div>
             ))}
           </section>

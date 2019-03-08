@@ -5,7 +5,8 @@ export default class AddNewsForm extends Component {
     state = {
         newsTitle: "",
         newsSummary: "",
-        newsURL: ""
+        newsURL: "",
+        timestamp: ""
     }
 
     // Update state whenever input is edited

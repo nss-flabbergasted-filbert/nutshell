@@ -7,7 +7,7 @@ export default class NewsEditForm extends Component {
     state = {
         newsTitle: "",
         newsSummary: "",
-        newsURL: "",
+        newsURL: ""
     }
 
     handleFieldChange = evt => {
@@ -22,7 +22,7 @@ export default class NewsEditForm extends Component {
             title: this.state.newsTitle,
             summary: this.state.newsSummary,
             url: this.state.newsURL,
-            timestamp: Date().split(" ").splice(0,5).join(" "),
+            timestamp: this.state.timestamp,
             userId: parseInt(sessionStorage.getItem("credentials")),
             id: this.props.match.params.articleId
         };
@@ -39,7 +39,7 @@ export default class NewsEditForm extends Component {
                         newsSummary: article.summary,
                         newsURL: article.url,
                         timestamp: article.timestamp,
-                        userId: article.userId
+                        id: this.props.match.params.articleId
                     })
                 })
             }
@@ -82,14 +82,14 @@ export default class NewsEditForm extends Component {
                               placeholder="News Story URL"
                               value={this.state.newsURL}
                           />
-                            <button
+                      </div>
+                      <button
             type="submit"
             onClick={this.updateExistingArticle}
             className="btn btn-primary"
           >
             Submit
           </button>
-                      </div>
                         </form>
             </React.Fragment>
         )
