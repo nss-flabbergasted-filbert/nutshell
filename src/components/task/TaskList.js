@@ -23,7 +23,7 @@ export default class TaskList extends Component {
                         this.props.tasks.map(task =>
                             <div className="task" key={task.id}>
                                 <Task task={task} {...this.props}
-                                    {...this.props}
+                                    {...this.props} users={this.props.users} 
                                     taskCompleted={this.props.taskCompleted}
                                     history={this.props.history} />
                                 </div>

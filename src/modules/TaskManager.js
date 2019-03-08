@@ -7,7 +7,7 @@ export default Object.create(APIManager, {
   },
   getAll: {
     value: function () {
-      return fetch(`${Settings.remoteURL}/${this.desiredDatabase}?isCompleted=false`)
+      return fetch(`${Settings.remoteURL}/${this.desiredDatabase}?isComplete=false`)
         .then(r => r.json())
     }
   },

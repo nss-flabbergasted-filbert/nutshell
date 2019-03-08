@@ -1,7 +1,5 @@
-.navbar {
-    background-color: #ffffff;
-    display: flex;
-    flex-direction: row;
-    padding: 20px
-
+.button {
+    border-radius: 10px;
+    margin: 10px;
+    box-shadow: 1em
 }

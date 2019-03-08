@@ -60,13 +60,13 @@ export default Object.create(null, {
   },
 
   patch: {
-    value: function (editedTask) {
-      return fetch(`${Settings.remoteURL}/${this.desiredDatabase}/${editedTask.id}`, {
+    value: function (obj, id) {
+      return fetch(`${Settings.remoteURL}/${this.desiredDatabase}/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(editedTask)
+        body: JSON.stringify(obj)
       })
         .then(r => r.json())
     }
