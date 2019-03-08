@@ -2,25 +2,23 @@ import React, { Component } from 'react'
 
 
 export default class Task extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
+  
+        state = {
             isComplete: false,
         };
 
-        this.handleInputChange = this.handleInputChange.bind(this);
-    }
+    
 
     updateTask = () => {
         const editedTask = {
             isComplete: this.state.isComplete
         }
 
-        this.props.patchTask(editedTask)
+        this.props.patchTask(editedTask, this.props.task.id)
             .then(() => this.props.history.push("/tasks"))
     }
 
-    handleInputChange () {
+    handleInputChange = () => {
         this.setState({isComplete: !this.state.isComplete}, () => this.updateTask())
     }
 
@@ -46,7 +44,7 @@ export default class Task extends Component {
 
                         name="isComplete"
                     
-                        onClick={() => this.props.taskCompleted(this.props.task.id)}
+                        onClick={() => this.handleInputChange()}
                     >
                     </input>
                 </div>

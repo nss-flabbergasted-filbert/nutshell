@@ -7,7 +7,7 @@ export default class TaskForm extends Component {
       name: "",
       date: "",
       userId: parseInt(sessionStorage.getItem("credentials")),
-    //   isComplete: false
+      isComplete: false
     };
   
     
@@ -25,7 +25,7 @@ export default class TaskForm extends Component {
           name: this.state.name,
           date: this.state.date,
           userId: this.state.userId,
-        //   isComplete: this.state.isComplete
+          isComplete: this.state.isComplete
         }
         this.props
           .addTask(tasks)

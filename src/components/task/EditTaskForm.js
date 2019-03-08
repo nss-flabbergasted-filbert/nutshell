@@ -6,7 +6,8 @@ export default class EditTaskForm extends Component {
     state = {
       name: "",
       date: "",
-    //   isComplete: false
+      userId: parseInt(sessionStorage.getItem("credentials")),
+      isComplete: false
     }
 
 
@@ -24,7 +25,8 @@ export default class EditTaskForm extends Component {
           id: this.props.match.params.taskId,
           name: this.state.name,
           date: this.state.date,
-        //   isComplete: this.state.isComplete
+          userId: this.state.userId,
+          isComplete: this.state.isComplete
         };
 
     this.props.editTask(editedTask)
@@ -38,7 +40,7 @@ export default class EditTaskForm extends Component {
         this.setState({
           name: task.name,
           date: task.date,
-        //   isComplete: task.isComplete
+          isComplete: task.isComplete
         });
       });
     }
