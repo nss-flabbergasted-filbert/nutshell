@@ -87,25 +87,25 @@ class ApplicationViews extends Component {
       .then(tasks => this.setState({ tasks: tasks }));
   };
 
-  patchTask = editedTask => {
-    return TaskManager.patch(editedTask) //create a patch call in API manager
+  patchTask = (editedTask, id) => {
+    return TaskManager.patch(editedTask, id) //create a patch call in API manager
       .then(() => {
         return TaskManager.getAll();
       })
       .then(tasks => this.setState({ tasks: tasks }));
   };
 
-  taskCompleted = id => {
-    const taskToChange = {
-      id: id,
-      isCompleted: true
-    };
-    this.patchTask(taskToChange)
-      .then(() => {
-        return TaskManager.getAll();
-      })
-      .then(tasks => this.setState({ tasks: tasks }));
-  };
+  // taskCompleted = id => {
+  //   const taskToChange = {
+  //     id: id,
+  //     isCompleted: true
+  //   };
+  //   this.patchTask(taskToChange)
+  //     .then(() => {
+  //       return TaskManager.getAll();
+  //     })
+  //     .then(tasks => this.setState({ tasks: tasks }));
+  // };
 
   addChat = message => {
     return ChatManager.post(message)

@@ -2,25 +2,26 @@ import React, { Component } from 'react'
 
 
 export default class Task extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
+  
+    // let users = this.props.users
+    // .find(user => parseInt(user.id) === parseInt(this.props.task.userId)) || {}
+
+        state = {
             isComplete: false,
         };
 
-        this.handleInputChange = this.handleInputChange.bind(this);
-    }
+    
 
     updateTask = () => {
         const editedTask = {
             isComplete: this.state.isComplete
         }
 
-        this.props.patchTask(editedTask)
+        this.props.patchTask(editedTask, this.props.task.id)
             .then(() => this.props.history.push("/tasks"))
     }
 
-    handleInputChange () {
+    handleInputChange = () => {
         this.setState({isComplete: !this.state.isComplete}, () => this.updateTask())
     }
 
@@ -37,22 +38,22 @@ export default class Task extends Component {
                             this.props.history.push(`/tasks/${this.props.task.id}/edit`);
                         }}
                     >Edit Task</button>
-                    {/* <form className="taskForm">
-                        <div className="form-group"> */}
+                    <form className="taskForm">
+                        <div className="form-group">
                     <label htmlFor="isComplete">Is Complete</label>
                     <input type="checkbox"
                         required
                         className="form-control"
 
                         name="isComplete"
-                        // checked={this.state.isComplete}
-                        onClick={() => this.props.taskCompleted(this.props.task.id)}
+                    
+                        onClick={() => this.handleInputChange()}
                     >
                     </input>
                 </div>
-                {/* </form> */}
+                </form> 
 
-                {/* </div> */}
+                 </div> 
             </React.Fragment >
         )
     }
