@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import "./NewsList.css"
+import NewsCard from "./NewsCard"
 
 export default class NewsList extends Component {
+
   render() {
 
     return (
@@ -19,30 +21,10 @@ export default class NewsList extends Component {
             </button>
           </div>
           <section>
-            {this.props.news.map(article => (
-              <div className="newsCard"key={article.id}>
-                <div><h2>{article.title}</h2></div>
-                <div>Synopsis: {article.summary}</div>
-                <div>Link: <a href={`${article.url}`}>Read Article</a></div>
-                <div>Date: {article.timestamp}</div>
-                <div>Posted By: {article.userId}</div>
-                <button
-                  type="button"
-                  className="btn btn-success"
-                  onClick={() => {
-                    this.props.history.push(
-                      `/articles/${article.id}/edit`
-                    );
-                  }}
-                >
-                  Edit
-                </button>
-                <button
-                            onClick={() => this.props.deleteNews(article.id)
-                                .then(() => this.props.history.push("/articles"))}
-                                className="card-link">Delete</button>
-              </div>
-            ))}
+            {
+              this.props.news.map(article =>
+                <NewsCard key={article.id} article={article} editNews={this.props.editNews} deleteNews={this.props.deleteNews} users={this.props.users} {...this.props} />
+              )}
           </section>
         </section>
       </React.Fragment>

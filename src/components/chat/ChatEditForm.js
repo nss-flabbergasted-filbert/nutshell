@@ -3,7 +3,8 @@ import ChatManager from "../../modules/ChatManager"
 
 export default class ChatEdit extends Component {
     state = {
-        text: ""
+        text: "",
+        users: ""
     }
 
     handleFieldChange = evt => {
@@ -17,7 +18,9 @@ export default class ChatEdit extends Component {
 
         const editedChat = {
             id: this.props.match.params.chatId,
-            text: this.state.text
+            text: this.state.text,
+            userId: parseInt(sessionStorage.getItem("credentials")),
+            date: this.state.date
         }
 
         this.props.updateChat(editedChat)
@@ -32,6 +35,7 @@ export default class ChatEdit extends Component {
     }
 
     render() {
+
         return (
             <React.Fragment>
             <form className="chatForm">
