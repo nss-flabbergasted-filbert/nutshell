@@ -32,7 +32,7 @@ class ApplicationViews extends Component {
 
   addNews = newArticle => {
     return ArticleManager.post(newArticle)
-      .then(() => ArticleManager.getAll())
+      .then(() => ArticleManager.sortArticles())
       .then(news => this.setState({ news: news }));
   };
 
@@ -137,9 +137,9 @@ class ApplicationViews extends Component {
     ChatManager.getAll().then(AllChats => {
       this.setState({ chats: AllChats });
     });
-    EventManager.getAll().then(events => this.setState({ events: events }));
+    EventManager.getEventsSorted().then(events => this.setState({ events: events }));
 
-    ArticleManager.getAll().then(allNews => {
+    ArticleManager.sortArticles().then(allNews => {
       this.setState({ news: allNews })
     })
     UserManager.getAll().then(users => this.setState({users: users}))
@@ -185,6 +185,7 @@ class ApplicationViews extends Component {
               <ChatEditForm
                 chats={this.state.chats}
                 updateChat={this.updateChat}
+                users={this.state.users}
                 {...props}
               />
             );
