@@ -6,7 +6,6 @@ export default class ChatForm extends Component {
         text: "",
         date: "",
         userId: "",
-        taco: ""
     }
 
     handleFieldChange = evt => {
@@ -22,7 +21,6 @@ export default class ChatForm extends Component {
             text: this.state.chatMessage,
             date: Date().split(" ").splice(0, 5).join(" "),
             userId: parseInt(sessionStorage.getItem("credentials")),
-            taco: this.state.userId.username
         }
 
         this.props

@@ -13,15 +13,16 @@ import ChatManager from '../modules/ChatManager'
 import ChatForm from "./chat/ChatForm"
 import EventEditForm from "./event/EventEditForm";
 import ChatEditForm from "./chat/ChatEditForm";
+import UserManager from "../modules/UserManager"
 
 class ApplicationViews extends Component {
   state = {
     chats: [],
     news: [],
     events: [],
-    tasks: []
+    tasks: [],
+    users: []
   }
-
 
   addNews = (newArticle) => {
     return ArticleManager.post(newArticle)
@@ -85,8 +86,6 @@ class ApplicationViews extends Component {
       .then(chats => { this.setState({ chats: chats })})
   }
 
-
-
   componentDidMount() {
     EventManager.getAll().then(events =>
       this.setState({ events: events }))
@@ -96,6 +95,7 @@ class ApplicationViews extends Component {
     ArticleManager.getAll().then((allNews) => {
       this.setState({ news: allNews })
     })
+    UserManager.getAll().then(users => this.setState({users: users}))
   }
 
   render() {
@@ -103,7 +103,7 @@ class ApplicationViews extends Component {
 
       <React.Fragment>
         <Route exact path="/chats" render={(props) => {
-          return <ChatList chats={this.state.chats} addChat={this.addChat} deleteChat={this.deleteChat} updateChat={this.updateChat} {...props} />
+          return <ChatList users={this.state.users} chats={this.state.chats} addChat={this.addChat} deleteChat={this.deleteChat} updateChat={this.updateChat} {...props} />
         }} />
         <Route exact path="/chats/new" render={(props) => {
           return <ChatForm chats={this.state.chats} addChat={this.addChat} {...props} />
